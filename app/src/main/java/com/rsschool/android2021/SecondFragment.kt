@@ -32,13 +32,16 @@ class SecondFragment : Fragment() {
         result?.text = generate(min, max).toString()
 
         backButton?.setOnClickListener {
+            fun Fragment.mainActivity() = requireActivity() as MainActivity
+            mainActivity().openFirstFragment(result?.text.toString().toInt())
             // TODO: implement back
         }
     }
 
     private fun generate(min: Int, max: Int): Int {
         // TODO: generate random number
-        return 0
+        val r = (min..max).random()
+        return r
     }
 
     companion object {
@@ -49,7 +52,9 @@ class SecondFragment : Fragment() {
             val args = Bundle()
 
             // TODO: implement adding arguments
-
+            args.putInt(MIN_VALUE_KEY, min)
+            args.putInt(MAX_VALUE_KEY, max)
+            fragment.arguments = args
             return fragment
         }
 
